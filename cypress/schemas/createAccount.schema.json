@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": [
+    "responseCode",
+    "message"
+  ],
+  "properties": {
+    "responseCode": {
+      "type": "integer"
+    },
+    "message": {
+      "type": "string"
+    }
+  }
+}
