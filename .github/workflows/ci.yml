@@ -1,0 +1,35 @@
+name: CI - Testes Automatizados
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Executar lint
+        run: npm run lint
+
+      - name: Executar testes
+        run: npm run test:all
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          TRELLO_ACTION_ID: ${{ secrets.TRELLO_ACTION_ID }}
+          API_CREATE_ACCOUNT_URL: ${{ secrets.API_CREATE_ACCOUNT_URL }}
+          DEFAULT_TIMEOUT: 10000
