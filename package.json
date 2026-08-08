@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "cypress:open": "cypress open",
-  "test:web": "cypress run --spec \"cypress/e2e/features/**/*.feature\"",
-  "test:api": "cypress run --spec \"cypress/e2e/api/**/*.cy.js\"",
-  "test:all": "cypress run",
-  "test:e2e": "npm run test:web",
-  "test:smoke": "cypress run --spec \"cypress/e2e/features/01_login.feature,cypress/e2e/features/02_search.feature\""
-},
+    "cypress:open": "cypress open",
+    "test:web": "cypress run --spec \"cypress/e2e/features/**/*.feature\"",
+    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.cy.js\"",
+    "test:all": "cypress run",
+    "test:e2e": "npm run test:web",
+    "test:smoke": "cypress run --spec \"cypress/e2e/features/01_login.feature,cypress/e2e/features/02_search.feature\"",
+    "lint": "eslint ."
+    
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,7 +23,8 @@
     "ajv": "^8.20.0",
     "cypress": "^15.20.0",
     "dotenv": "^17.4.2",
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.1",
+    "eslint": "^10.8.1"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [

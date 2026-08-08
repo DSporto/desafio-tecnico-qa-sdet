@@ -5,7 +5,6 @@ const {
 } = require("@badeball/cypress-cucumber-preprocessor");
 
 const loginPage = require("../../support/page_objects/LoginPage");
-const cartPage = require("../../support/page_objects/CartPage");
 const checkoutPage = require("../../support/page_objects/CheckoutPage");
 
 let user;
