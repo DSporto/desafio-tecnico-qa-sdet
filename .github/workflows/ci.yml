@@ -33,3 +33,19 @@ jobs:
           TRELLO_ACTION_ID: ${{ secrets.TRELLO_ACTION_ID }}
           API_CREATE_ACCOUNT_URL: ${{ secrets.API_CREATE_ACCOUNT_URL }}
           DEFAULT_TIMEOUT: 10000
+
+      - name: Salvar videos do Cypress
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos/
+          if-no-files-found: ignore
+
+      - name: Salvar screenshots de falhas
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/
+          if-no-files-found: ignore
