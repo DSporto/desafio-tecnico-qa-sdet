@@ -376,6 +376,7 @@ Durante as execuções realizadas foram observados:
 - Testes completos de acessibilidade, performance e segurança ofensiva não fazem parte da cobertura atual.
 - Algumas telas dependem dos seletores disponibilizados pela própria aplicação.
 - A cobertura de validações de campos obrigatórios pode ser expandida para validar mensagens individualmente.
+- Durante a execução no GitHub Actions, o ambiente público do Automation Exercise pode responder com HTTP 403 para requisições originadas dos runners hospedados. Esse comportamento foi observado tanto nos cenários Web quanto na API, embora a suíte execute normalmente no ambiente local.
 
 ## Riscos residuais
 
