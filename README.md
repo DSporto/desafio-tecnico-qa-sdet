@@ -145,12 +145,13 @@ npm run lint
 
 ## Cenários Web automatizados
 
-A suíte Web possui atualmente 10 cenários automatizados.
+A suíte Web possui atualmente 11 cenários automatizados.
 
 ### Login
 
 - Login com usuário válido
 - Login com senha inválida
+- Logout de usuário autenticado
 
 ### Busca
 
@@ -223,7 +224,7 @@ A estratégia foi construída priorizando os fluxos de maior risco para o usuár
 A suíte foi separada em:
 
 - **Smoke:** autenticação e busca;
-- **Web E2E:** login, busca, carrinho e checkout;
+- **Web E2E:** login, logout, busca, carrinho e checkout;
 - **API:** Trello e Automation Exercise;
 - **Lint:** análise estática do código;
 - **CI:** execução automatizada em ambiente Linux.
@@ -319,19 +320,26 @@ O `.env` real não é versionado.
 A suíte completa possui atualmente:
 
 ```text
-Web:   10 testes
+Web:   11 testes
 API:    3 testes
-Total: 13 testes
+Total: 14 testes
 ```
 
-Na última execução local registrada:
+Na última execução completa:
 
 ```text
-13 passing
+14 passing
 0 failing
 ```
 
-A suíte também foi executada com sucesso através do GitHub Actions.
+A execução completa pode ser realizada através de:
+
+```bash
+npm run test:all
+```
+
+
+A suíte também possui execução automatizada através do GitHub Actions.
 
 ## Hipóteses assumidas
 
@@ -349,6 +357,7 @@ Durante as execuções realizadas foram observados:
 
 - login válido permite acesso à aplicação;
 - login inválido apresenta mensagem de erro;
+- logout encerra a sessão autenticada e retorna o usuário para a página de login;
 - busca retorna produtos correspondentes;
 - busca inexistente é tratada pela aplicação;
 - produtos podem ser adicionados ao carrinho;
@@ -374,8 +383,8 @@ Os principais riscos que permanecem sem cobertura completa são:
 
 - alterações de layout ou seletores do ambiente público;
 - indisponibilidade das APIs externas;
-- comportamento de sessão e logout ainda não coberto em profundidade;
-- regras de preço, subtotal e inclusão duplicada no carrinho ainda não cobertas integralmente;
+- comportamento básico de logout está coberto, porém cenários adicionais de sessão, expiração e acesso a páginas protegidas após logout ainda não estão cobertos;
+- regras de preço, subtotal e inclusão duplicada no carrinho ainda não estão cobertas integralmente;
 - cenários de fronteira de busca, como entrada vazia e normalização de espaços;
 - validações negativas adicionais no checkout;
 - comportamento em diferentes navegadores e resoluções.
@@ -462,7 +471,7 @@ Em uma iniciativa real, os próximos incrementos recomendados seriam:
 1. disponibilizar ambiente dedicado de homologação;
 2. adotar seletores semânticos ou atributos `data-*` controlados pela equipe;
 3. ampliar a cobertura negativa e de valores de fronteira;
-4. incluir validações mais completas de sessão e logout;
+4. ampliar as validações de sessão, incluindo expiração, acesso após logout e comportamento de páginas protegidas;
 5. ampliar as verificações de preço, subtotal e consistência do carrinho;
 6. adicionar relatório HTML consolidado das execuções;
 7. criar factories reutilizáveis para geração de massa de dados;
@@ -476,6 +485,8 @@ Até o momento, o projeto possui:
 
 - automação Web com Cypress e Cucumber;
 - automação de API;
+- cenários positivos e negativos;
+- cobertura básica de login e logout;
 - Page Object Model;
 - validação de contratos com JSON Schema;
 - configuração por variáveis de ambiente;

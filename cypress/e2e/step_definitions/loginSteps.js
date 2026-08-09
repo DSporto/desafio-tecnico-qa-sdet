@@ -39,3 +39,23 @@ Then("devo visualizar minha conta", () => {
 Then("devo visualizar uma mensagem de erro", () => {
   loginPage.validarMensagemErro();
 });
+
+Given("que estou autenticado na aplicação", () => {
+  cy.fixture("users").then((users) => {
+    user = users.validUser;
+
+    loginPage.realizarLogin(user.email, user.password);
+  });
+});
+
+When("solicito o logout", () => {
+  loginPage.clicarLogout();
+});
+
+Then("devo retornar para a página de login", () => {
+  loginPage.validarLogoutRealizado();
+});
+
+Then("não devo permanecer autenticado", () => {
+  cy.contains("Logged in as").should("not.exist");
+});
